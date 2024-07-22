@@ -1,0 +1,6 @@
+package com.dogu.portfolio.domain.repository
+
+import com.dogu.portfolio.domain.entity.Skill
+import org.springframework.data.jpa.repository.JpaRepository
+
+interface SkillRepository : JpaRepository<Skill, Long>
