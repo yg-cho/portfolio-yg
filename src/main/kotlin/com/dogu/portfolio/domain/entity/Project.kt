@@ -42,7 +42,7 @@ class Project(
     @JoinColumn(name = "project_id")
     var details: MutableList<ProjectDetail> = mutableListOf()
 
-    @OneToMany(mappedBy = "project")
+    @OneToMany(mappedBy = "project", cascade = [CascadeType.ALL])
     var skills: MutableList<ProjectSkill> = mutableListOf()
 
     fun getEndYearMonth() : String {

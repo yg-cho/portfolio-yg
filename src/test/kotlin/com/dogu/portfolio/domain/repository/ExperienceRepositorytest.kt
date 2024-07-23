@@ -19,10 +19,11 @@ class ExperienceRepositoryTest(
 
     val DATA_SIZE = 10
 
-    private fun createExperience(n: Int) : Experience {
+    // 더미 객체 생성
+    private fun createExperience(n: Int): Experience {
         val experience = Experience(
             title = "${n}",
-            description = "테스트 설명 ${n}",
+            description = "테스트 설명 {n}",
             startYear = 2023,
             startMonth = 9,
             endYear = 2023,
@@ -32,60 +33,57 @@ class ExperienceRepositoryTest(
 
         val details = mutableListOf<ExperienceDetail>()
         for (i in 1..n) {
-            val experienceDetail = ExperienceDetail(content = "테스트${i}", isActive = true)
+            val experienceDetail = ExperienceDetail(content = "테스트 ${i}", isActive = true)
             details.add(experienceDetail)
         }
-
         experience.addDetails(details)
 
         return experience
     }
 
+    // 테스트 데이터 초기화
     @BeforeAll
     fun beforeAll() {
-        println("----- 데이터 초기화 이전 조회 시작")
+        println("----- 데이터 초기화 이전 조회 시작 -----")
         val beforeInitialize = experienceRepository.findAll()
         assertThat(beforeInitialize).hasSize(0)
-        println("----- 데이터 초기화 이전 조회 종료")
+        println("----- 데이터 초기화 이전 조회 종료 -----")
 
-        println("----- 테스트 데이터 초기화 시작")
+        println("----- 테스트 데이터 초기화 시작 -----")
         val experiences = mutableListOf<Experience>()
         for (i in 1..DATA_SIZE) {
             val experience = createExperience(i)
             experiences.add(experience)
         }
-
         experienceRepository.saveAll(experiences)
-        println("----- 테스트 데이터 초기화 종료")
+        println("----- 테스트 데이터 초기화 종료 -----")
     }
 
     @Test
     fun testFindAll() {
-        println("------- findAll 테스트 시작 -------")
+        println("----- findAll 테스트 시작 -----")
         val experiences = experienceRepository.findAll()
         assertThat(experiences).hasSize(DATA_SIZE)
-        println("experiences.size = ${experiences.size}")
+        println("experiences.size: ${experiences.size}")
 
         for (experience in experiences) {
             assertThat(experience.details).hasSize(experience.title.toInt())
-            println("experience.details.size =${experience.details.size}")
+            println("experience.details.size: ${experience.details.size}")
         }
-
-        println("------- findAll 테스트 종료 -------")
+        println("----- findAll 테스트 종료 -----")
     }
 
     @Test
     fun testFindAllByIsActive() {
-        println("------- findAll 테스트 시작 -------")
+        println("----- findAllByIsActive 테스트 시작 -----")
         val experiences = experienceRepository.findAllByIsActive(true)
         assertThat(experiences).hasSize(DATA_SIZE)
-        println("experiences.size = ${experiences.size}")
+        println("experiences.size: ${experiences.size}")
 
         for (experience in experiences) {
             assertThat(experience.details).hasSize(experience.title.toInt())
-            println("experience.details.size =${experience.details.size}")
+            println("experience.details.size: ${experience.details.size}")
         }
-
-        println("------- findAll 테스트 종료 -------")
+        println("----- findAllByIsActive 테스트 종료 -----")
     }
 }
