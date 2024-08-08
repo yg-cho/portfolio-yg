@@ -3,15 +3,14 @@ package com.dogu.portfolio.presentation.dto
 import com.dogu.portfolio.domain.entity.Achievement
 import com.dogu.portfolio.domain.entity.Experience
 import com.dogu.portfolio.domain.entity.Skill
-import org.springframework.format.annotation.DateTimeFormat
 import java.time.format.DateTimeFormatter
 
 class ResumeDTO(
-    experience: List<Experience>,
+    experiences: List<Experience>,
     achievements: List<Achievement>,
     skills: List<Skill>
 ) {
-    var experience: List<ExperienceDTO> = experience.map {
+    var experience: List<ExperienceDTO> = experiences.map {
         ExperienceDTO(
             title = it.title,
             description = it.description,

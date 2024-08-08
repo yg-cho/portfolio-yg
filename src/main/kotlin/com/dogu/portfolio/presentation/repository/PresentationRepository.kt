@@ -32,8 +32,4 @@ class PresentationRepository(
     fun getActiveProjects():List<Project> {
         return projectRepository.findAllByIsActive(true)
     }
-
-
-
-
 }
