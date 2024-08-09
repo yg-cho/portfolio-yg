@@ -13,6 +13,8 @@ class PresentationService(
     private val presentationRepository: PresentationRepository
 ) {
 
+
+
     @Transactional(readOnly = true)
     fun getIntroductions():List<IntroductionDTO> {
         val intruductions = presentationRepository.getActiveIntroductions()
