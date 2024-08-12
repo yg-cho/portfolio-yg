@@ -20,7 +20,7 @@ class PresentationViewController(
     fun index(model: Model): String {
 
         val introductions = presentationService.getIntroductions()
-        model.addAttribute("intructions", introductions)
+        model.addAttribute("introductions", introductions)
 
         val links = presentationService.getLinks()
         model.addAttribute("links", links)
