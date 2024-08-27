@@ -1,18 +1,16 @@
 package com.dogu.portfolio.admin.context.skill.service
 
+import com.dogu.portfolio.admin.context.skill.form.SkillForm
 import com.dogu.portfolio.admin.data.TableDTO
-import com.dogu.portfolio.domain.entity.Achievement
-import com.dogu.portfolio.domain.entity.Introduction
-import com.dogu.portfolio.domain.entity.Link
 import com.dogu.portfolio.domain.entity.Skill
-import com.dogu.portfolio.domain.repository.IntroductionRepository
-import com.dogu.portfolio.domain.repository.LinkRepository
+import com.dogu.portfolio.domain.repository.SkillRepository
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
 
 @Service
 class AdminSkillService(
-    private val skillRepository: LinkRepository
+    private val skillRepository: SkillRepository,
 ) {
 
     fun getSkillTable(): TableDTO {
@@ -20,5 +18,17 @@ class AdminSkillService(
         val entities = skillRepository.findAll()
 
         return TableDTO.from(classInfo, entities)
+    }
+
+    @Transactional
+    fun save(form: SkillForm) {
+        val skill = form.toEntity()
+        skillRepository.save(skill)
+    }
+
+    @Transactional
+    fun update(id: Long, form: SkillForm) {
+        val skill = form.toEntity(id)
+        skillRepository.save(skill)
     }
 }
