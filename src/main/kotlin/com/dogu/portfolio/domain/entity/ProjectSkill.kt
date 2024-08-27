@@ -6,7 +6,7 @@ import jakarta.persistence.*
 class ProjectSkill(
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "project_id")
-    var project: Project? = null,
+    var project: Project,
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "skill_id")
